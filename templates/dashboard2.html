@@ -2,7 +2,7 @@
 
 
 {% load static %}
-<img src="{% static '/home/aditya/Desktop/Django/legistify-master/static/images/pic.jpg' %}" alt="My image">
+<img src="{% static 'pic.jpg' %}" alt="My image">
 
 {% block title %}
 Legistify|Lawyers
@@ -65,6 +65,7 @@ Last login {{ user.last_login|timesince }} ago
       <p>Description: {{ r.description }} <br>
          Date of appointment: {{ r.date }}<br>
          Status : Accepted 
+         <li><a href="{% block link2 %}{% url 'chat' %}{% endblock %}"><buttom>Chat-Now</button></a></li>
       </p>
 
     </li>

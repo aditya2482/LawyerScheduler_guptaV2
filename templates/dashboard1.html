@@ -12,7 +12,7 @@ Logout
 {% endblock %}
 
 {% load static %}
-<img src="{% static '/home/aditya/Desktop/Django/legistify-master/static/images/pic.jpg' %}" alt="My image">
+<img src="{% static 'images/pic.jpg' %}" alt="My image">
 
 
 {% load cfilters %}
@@ -30,10 +30,12 @@ Logout
 <div class="row">
 <form action="" method='POST' onsubmit="return false" style="padding-bottom:90px" class="col s10 offset-s2">{% csrf_token %}
 	{% for lawyer in lawyers %}
-    <p>
+    <p> {% if lawyer.startdate and lawyer.enddate %}
       <input name="lawyer" type="radio" id="{{ lawyer.id }}" value="{{ lawyer.id }}" />
-      <label for="{{ lawyer.id }}">Name: {{ lawyer.name }} &nbsp Email Id: {{ lawyer.email }}  &nbsp {% if lawyer.startdate and lawyer.enddate %}available from {{ lawyer.startdate }}&nbsp to {{ lawyer.enddate }}&nbsp{% endif %}</label>
-    </p>
+      <label for="{{ lawyer.id }}">Name: {{ lawyer.name }} &nbsp Email Id: {{ lawyer.email }}  &nbsp available from {{ lawyer.startdate }}&nbsp to {{ lawyer.enddate }}
+        </label> <br>
+    </p><br>
+    &nbsp {% endif %}
     {% endfor %}
 
      	<div class="row">
@@ -68,10 +70,12 @@ Logout
       <i class="material-icons circle green">insert_chart</i>
       <span class="title">Description: {{ r.description }}</span>
       <p>
+        <li2><a href="{% block link1 %}{% url 'chat' %}{% endblock %}"><buttom>Chat-Now</button></a></li2><br>
+        lawyer ID : {{ r.to_userid  }}<br>
          Date of appointment: {{ r.date }}<br>
          Status : Accepted
       </p>
-
+      </i>
     </li>
 
     {% elif r.denied %}
@@ -90,7 +94,7 @@ Logout
       <i class="material-icons circle red">play_arrow</i>
       <span class="title">Description: {{ r.description }}</span>
       <p> <center>
-        <li><a href="{% block link1 %}{% url 'chat' %}{% endblock %}"><buttom>Chat-Now</button></a></li>
+        
          Date of appointment: {{ r.date }}<br>
          Status : Pending
       </p></center>

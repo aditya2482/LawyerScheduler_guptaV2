@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'booking',
     'chatty',
-    'channels'
+    'channels',
+    'feedback',
 ]
 
 MIDDLEWARE = [
@@ -51,20 +52,13 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-# authenication
+
 DEFAULT_AUTO_FIELD='django.db.models.AutoField' 
 
 AUTHENTICATION_BACKENDS = ('django.contrib.auth.backends.ModelBackend')
 AUTH_USER_MODEL = 'booking.Users'
 
 ROOT_URLCONF = 'legistify.urls'
-
-EMAIL_HOST = "smtp.gmail.com"
-EMAIL_PORT = "587"
-EMAIL_HOST_USER = "replytoprojectolss4@gmail.com"
-EMAIL_HOST_PASSWORD = "gocnkltrwiomllac"
-EMAIL_USE_TLS = True
 
 # EMAIL_HOST = "smtp.gmail.com"
 # EMAIL_PORT = "587"
@@ -75,7 +69,7 @@ EMAIL_USE_TLS = True
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'DIRS': [os.path.join(BASE_DIR, 'templates'),os.path.join(BASE_DIR, 'templates/chat'),os.path.join(BASE_DIR, 'static')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
