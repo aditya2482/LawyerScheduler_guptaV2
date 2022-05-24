@@ -1,0 +1,323 @@
+<html>
+<head>
+    <title>
+        {% load staticfiles %}
+        {% load cfilters %}
+        {% block title %}
+        Legistify|Home
+        {% endblock %}
+
+        {% load static %}
+        <img src="{% static '/home/aditya/Desktop/Django/legistify-master/static/images/pic.jpg' %}" alt="My image">
+
+    </title>
+    <script src="https://code.jquery.com/jquery-1.12.3.js"
+            integrity="sha256-1XMpEtA4eKXNNpXcJ1pmMPs8JV+nwLdEqwiJeCQEkyc="
+            crossorigin="anonymous"></script>
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+
+</head>
+<body>
+
+    <nav style="background-color:#4e342e">
+        <div class="container">
+            <div class="nav-wrapper" style="color:green">
+                <h4 class="brand-logo">Legistify</h4>
+                <ul id="nav-mobile" class="right hide-on-med-and-down">
+                    <li><a href="{% block link %}{% url 'login' %}{% endblock %}">{% block linkname %}Login{% endblock %}</a></li>
+                    <li><a href="{% block link2 %}{% url 'developer' %}{% endblock %}">{% block linkname2 %}Developers{% endblock %}</a></li>
+                    <li>{% block ll %}{% endblock %}</li>
+
+                </ul>
+
+                <ul class="right side-nav" id="nav-mobile">
+                    <li class="hide-on-small-only"><a href="parallax.html"><i class="mdi-navigation-arrow-back"></i></a></li>
+                </ul>
+                <a class="button-collapse" href="#" data-activates='nav-mobile'><i class="mdi-navigation-menu"></i></a>
+            </div>
+        </div>
+    </nav>
+
+        <style type="text/css" >
+        .errorlist li {
+            color: red;
+        }
+
+        .messages li {
+            color: green;
+        }
+
+        .messages .error {
+            color: red;
+        }
+
+        /* The Modal (background) */
+        .modal1 {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0,0,0); /* Fallback color */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+            -webkit-animation-name: fadeIn; /* Fade in the background */
+            -webkit-animation-duration: 0.4s;
+            animation-name: fadeIn;
+            animation-duration: 0.4s
+        }
+
+        /* Modal Content */
+        .modal-content1 {
+            position: fixed;
+            bottom: 0;
+            background-color: #fefefe;
+            width: 100%;
+            -webkit-animation-name: slideIn;
+            -webkit-animation-duration: 0.4s;
+            animation-name: slideIn;
+            animation-duration: 0.4s
+        }
+
+        /* The Close Button */
+        .close1 {
+            color: white;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+            .close1:hover,
+            .close1:focus {
+                color: #000;
+                text-decoration: none;
+                cursor: pointer;
+            }
+
+        .modal-header1 {
+            padding: 2px 16px;
+            background-color: #5cb85c;
+            color: white;
+        }
+
+        .modal-body1 {
+            padding: 2px 16px;
+        }
+
+        .modal-footer1 {
+            padding: 2px 16px;
+            background-color: #5cb85c;
+            color: white;
+        }
+
+
+        .parallax-container {
+            height: 300px;
+        }
+        /* The Modal (background) */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            padding-top: 100px; /* Location of the box */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0,0,0); /* Fallback color */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        }
+
+        /* Modal Content */
+        .modal-content {
+            position: relative;
+            background-color: #fefefe;
+            margin: auto;
+            padding: 0;
+            border: 1px solid #888;
+            width: 80%;
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+            -webkit-animation-name: animatetop;
+            -webkit-animation-duration: 0.4s;
+            animation-name: animatetop;
+            animation-duration: 0.4s
+        }
+
+        /* Add Animation */
+        @-webkit-keyframes animatetop {
+            from {
+                top: -300px;
+                opacity: 0
+            }
+
+            to {
+                top: 0;
+                opacity: 1
+            }
+        }
+
+        @keyframes animatetop {
+            from {
+                top: -300px;
+                opacity: 0
+            }
+
+            to {
+                top: 0;
+                opacity: 1
+            }
+        }
+
+        /* The Close Button */
+        .close {
+            color: white;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+            .close:hover,
+            .close:focus {
+                color: #000;
+                text-decoration: none;
+                cursor: pointer;
+            }
+
+        .modal-header {
+            padding: 2px 16px;
+            background-color: #5cb85c;
+            color: white;
+        }
+
+        .modal-body {
+            padding: 2px 16px;
+        }
+
+        .modal-footer {
+            padding: 2px 16px;
+            background-color: black;
+            color: white;
+        }
+    </style>
+    <h1>Please first verify your Email id</h1>
+
+    <button id="myBtn">Send email</button>
+    <button id="myBtn1">Verify OTP</button>
+    <br>
+    {% if data == "15" %}
+    <!-- Trigger/Open The Modal -->
+    Please enter correct OTP
+    {% endif %}
+
+
+    <!-- The Modal -->
+    <div id="myModal1" class="modal1">
+
+        <!-- Modal content -->
+        <div class="modal-content1">
+            <div class="modal-header1">
+                <span class="close1">&times;</span>
+                <h2>Verify OTP</h2>
+            </div>
+            <div class="modal-body1">
+                <form action="{% url 'send_otp' %}" method="POST">
+                    {% csrf_token %}
+
+                    <div>
+                        <input id="msg" name="mess" type="text" placeholder="Please enter your otp here.">
+                    </div>
+                    <input type="submit" , value="OTP here">
+
+                </form>
+            </div>
+
+        </div>
+
+    </div>
+    <!-- end of The Modal  -->
+    {{ context }}
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="close">&times;</span>
+                <h2>Verification Of E-Mail</h2>
+            </div>
+            <div class="modal-body">
+                <form action="{% url 'send_mail' %}" method="POST">
+                    {% csrf_token %}
+
+                    <div>
+                        <label for="msg">Please enter your email id:</label>
+                        <input id="msg" name="message" type="text" placeholder="Put Your email id here">
+                    </div>
+                    <input type="submit" , value="Send Mail">
+                </form>
+            </div>
+        </div>
+        <!-- end modal-->>
+        <script type="text/javascript">
+            var modal1 = document.getElementById("myModal1");
+
+            // Get the button that opens the modal
+            var btn1 = document.getElementById("myBtn1");
+
+            // Get the <span> element that closes the modal
+            var span1 = document.getElementsByClassName("close1")[0];
+
+            // When the user clicks the button, open the modal
+            btn1.onclick = function () {
+                modal1.style.display = "block";
+            }
+
+            // When the user clicks on <span> (x), close the modal
+            span1.onclick = function () {
+                modal1.style.display = "none";
+            }
+
+            // When the user clicks anywhere outside of the modal, close it
+            window.onclick = function (event) {
+                if (event.target == modal1) {
+                    modal1.style.display = "none";
+                }
+            }
+            // Get the modal
+            var modal = document.getElementById("myModal");
+
+            // Get the button that opens the modal
+            var btn = document.getElementById("myBtn");
+
+            // Get the <span> element that closes the modal
+            var span = document.getElementsByClassName("close")[0];
+
+            // When the user clicks the button, open the modal
+            btn.onclick = function () {
+                modal.style.display = "block";
+            }
+
+            // When the user clicks on <span> (x), close the modal
+            span.onclick = function () {
+                modal.style.display = "none";
+            }
+
+            // When the user clicks anywhere outside of the modal, close it
+            window.onclick = function (event) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            }
+        </script>
+
+
+</html>
