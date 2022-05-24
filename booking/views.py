@@ -4,7 +4,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 import copy
 from .forms import *
-from .models import *
+from .models import  Users , Bookingrequests
 from django.contrib.auth import login , logout,authenticate
 from django.contrib.auth.hashers import check_password,make_password 
 from django.contrib.auth.decorators import login_required
@@ -15,15 +15,9 @@ import re
 from django.core.mail import send_mail
 from django.contrib import messages
 
-from django.core.mail import EmailMessage
+
 # Create your views here.
-import random
-def ot():
-	global a
-	a=random.randint(100000,999999)
-	return a
-def first_1(request):
-	return render(request,"first.html")
+
 def convert_to_date_object(date):
     """Converting date string to datetime.date object."""
     try:
@@ -32,60 +26,8 @@ def convert_to_date_object(date):
     except:
         return None
 
-
-def next_signup(request):
-	response = copy.deepcopy(RESPONSE_FORMAT)
-	form = Signupform(request.POST or None)
-	if request.method == 'POST':
-		if form.is_valid():
-			data = form.cleaned_data
-			Users.create_user(data=data)
-			response['message'] = "Successfully registered!"
-			messages.success(request, 'Successfully registered. Login to continue.')
-			return redirect('signup')
-	context = {'form':form}
-	return render(request,'signup.html',context)
-
-def s_otp(request):
-    if request.method=="POST":
-        me=request.POST.get('message')
-        return render(request,'otp.html')		
-    else:
-        return HttpResponse('Invalid request')
-
-def send_gmail(request):
-    if request.method=="POST":
-        message= request.POST.get('message')
-        send_mail("test","HI welcome to our site.OTP is {}".format(ot()),"replytoprojectolss4@gmail.com",[message], fail_silently=False,)
-        return render(request,'first.html')
-    else:
-        return HttpResponse('Invalid request')
-
-
-def send_otp(request):
-	if request.method=='POST':
-		context={
-			'data':'12',
-			}
-		otp=request.POST.get('mess')
-		print(otp,a)
-		if int(otp)==a:
-			print("verified")
-			return redirect('signup')
-		else:
-			context['data']='15'
-			print("not verified")
-			return render(request,'first.html',context)
-			
-	
-		return redirect('signup')
-	else:
-		return HttpResponse('Invalid request')
-	
-def next_1(request):
-	return redirect('signup')
-
-
+def homepage(request):
+	return render(request,'homepage.html')
 
 def signup(request):
 	response = copy.deepcopy(RESPONSE_FORMAT)
@@ -117,10 +59,14 @@ def userlogin(request):
 			if user:
 				user.backend = settings.AUTHENTICATION_BACKENDS
 				login(request, user)
+				
 				if user.is_lawyer :
 					return redirect('lawyerdashboard')
 				else:
-					return redirect('userdashboard')
+					if request.get_full_path() == '/api/login?next=/feedback':
+						return redirect('feedback')
+					else:
+						return redirect('userdashboard')
 			else:
 				messages.error(request,"Invalid login credentials")
 				return redirect('login')
@@ -149,6 +95,7 @@ def lawyerdashboard(request):
 	'bookingrequests' : Bookingrequests.objects.all().filter(to_userid=user.id),
 	'form' : form,
 	'user' : user,
+	
 	}
 	return render(request,'dashboard2.html',context)
 
@@ -173,6 +120,7 @@ def userdashboard(request):
 	'bookingrequests' : Bookingrequests.objects.all().filter(from_userid=user.id),
 	'lawyers' : Users.objects.all().filter(is_lawyer=True),
 	'user' : user,
+	# 'lname': Users.objects.filter(id=Bookingrequests.to_userid).values('name')
 	}
 	return render(request,'dashboard1.html',context)
 

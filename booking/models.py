@@ -18,6 +18,37 @@ class UserCustomManager(BaseUserManager):
 		return self.create_user(name,email,password)
 
 		
+# class MyUserManager(BaseUserManager):
+#     def create_user(self, email, is_lawyer, password=None):
+#         """
+#         Creates and saves a User with the given email, date of
+#         birth and password.
+#         """
+#         if not email:
+#             raise ValueError('Users must have an email address')
+
+#         user = self.model(
+#             email=self.normalize_email(email),
+#             is_lawyer=False,
+#         )
+
+#         user.set_password(password)
+#         user.save(using=self._db)
+#         return user
+
+#     def create_superuser(self, email, is_lawyer, password=None):
+#         """
+#         Creates and saves a superuser with the given email, date of
+#         birth and password.
+#         """
+#         user = self.create_user(
+#             email,
+#             password=password,
+#             is_lawyer=True,
+#         )
+#         user.is_admin = True
+#         user.save(using=self._db)
+#         return user
 
 
 
@@ -27,10 +58,20 @@ class Users(AbstractBaseUser):
 	is_lawyer = models.BooleanField(default=False)
 	startdate = models.DateField(null=True, blank=True)
 	enddate = models.DateField(null=True, blank=True)
-
+	# ratings for lawyer
+	rating_stars = models.IntegerField(default=0)
+	total_rating_given = models.IntegerField(default=0)
+	# end here
 	objects = UserCustomManager()
 	USERNAME_FIELD = 'email'
 	REQUIRED_FIELDS = ['name']
+
+	#function to calculate avg rating of a lawyer
+	# def set_attrib(self, attribute_string, value):
+	# 	setattr(self,attribute_string,value)
+	def rating_stars_for_lawyer(stars):
+		rating_stars = int((stars+rating_stars)/total_rating_given)
+		
 
 
 
@@ -91,10 +132,6 @@ class Bookingrequests(models.Model):
 		# appointment.save()
 		# return appointment 
 
-
-
-
-	
 
 	def __unicode__(self):
 		return str(self.id)
